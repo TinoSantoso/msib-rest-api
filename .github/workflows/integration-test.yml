@@ -23,10 +23,7 @@ jobs:
         run: php artisan key:generate
       - name: Set up database
         run: |
-          mkdir -p database
-          touch database/database.sqlite
+          php -r "file_exists('database/database.sqlite') || touch('database/database.sqlite');"
+          php artisan migrate
       - name: Execute tests
-        env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
         run: php artisan test
