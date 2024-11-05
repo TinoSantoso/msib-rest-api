@@ -11,9 +11,12 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($product_name = null)
     {
         $products = Product::all();
+        if (!empty($product_name)) {
+            $products = 'test query';
+        }
 
         if ($products->isEmpty()) {
             return response()->json([
