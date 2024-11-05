@@ -22,8 +22,7 @@ jobs:
       - name: Generate app Key
         run: php artisan key:generate
       - name: Set up database
-        run: mkdir -p database
-        touch database/database.sqlite
+        run: php -r "file_exists('./database/database.sqlite') || touch('./database/database.sqlite');"
       - name: Execute tests
         env:
         DB_CONNECTION: sqlite
